@@ -7,14 +7,14 @@ function Hero() {
            <div className="container"><NavHero /></div> 
             <div className="container search-area text-center">
                 <div className="row text-center">
-                    <h2>Free and open source platform to search npm modules</h2>
-                    <div className="search">
-                        <div className="row">
+                    <p className="md:text-6xl font-extrabold">Free and open source platform to search npm modules</p>
+                    <div className="search rounded-xl mt-10">
+                        <div className="row ">
                             <div className="col-md-10">
-                                <input type="text" className="search-box" name="search-box" id="search-box" placeholder="search for a package"/>
+                                <input type="text" className="search-box text-black" name="search-box" id="search-box" placeholder="Search for a package"/>
                             </div>
-                            <div className="col-md-2">
-                               <button className="search-button">Search <i class="ri-search-line"></i></button>
+                            <div className="col-md-2 ">
+                               <button className="search-button rounded-xl">Search </button>
                             </div>
                         </div>
                     </div>
