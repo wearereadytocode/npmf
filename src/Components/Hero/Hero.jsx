@@ -7,7 +7,7 @@ function Hero() {
            <div className="container"><NavHero /></div> 
             <div className="container search-area text-center">
                 <div className="row text-center">
-                    <p className="md:text-6xl font-extrabold">Free and open source platform to search npm modules</p>
+                    <p className="md:text-4xl font-extrabold">Free and open source platform to search npm modules</p>
                     <div className="search rounded-xl mt-10">
                         <div className="row ">
                             <div className="col-md-10">
