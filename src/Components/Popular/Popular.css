@@ -1,0 +1,21 @@
+.Popular{
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+}
+.Popular .row{
+    border: 0.5px solid rgb(197, 197, 197);
+    margin-bottom: 20px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+.Popular .row:hover{
+    transform: translateY(-10px);
+}
+.Popular .col-md-7{
+    padding: 20px 20px;
+}
+.Popular .col-md-5{
+    padding: 20px 20px;
+    line-height: 2;
+}
