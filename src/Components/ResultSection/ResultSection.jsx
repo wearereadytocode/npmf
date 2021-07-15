@@ -1,110 +1,72 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './ResultSection.css'
+import axios from 'axios'
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { useHistory } from 'react-router-dom'
+
+
 function ResultSection() {
+    const history = useHistory()
+    const [result, setresult] = useState([])
+    const [searchterm, setsearchterm] = useState("")
+    const [loading, setloading] = useState(false)
+    useEffect(() => {
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const term = urlParams.get('term')
+        setsearchterm(term)
+        console.log(term);
+        setloading(true)
+        axios.get(`https://api.npms.io/v2/search?q=` + term).then((data) => {
+            setresult(data.data.results)
+            console.log(data.data.results);
+            setloading(false)
+        })
+
+    }, [])
+    const handleDetails = (packagename) =>{
+        history.push(`/details?name=${packagename}`)
+    }
     return (
         <div className="Results">
             <div className="container">
-                <h2>Search result for "React"</h2>
+                <h2>Search result for "{searchterm}"</h2>
+                {loading?
+                <div className="w-full pt-28 flex">
+                    <div className="mx-auto my-auto">
+                        <CircularProgress />
+                    </div>
+                </div>
+                :null}
                 <div className="row">
-                    <div className="col-md-4">
-                        <div className="card">
-                            <h4>React (4.5.6)</h4>
-                            <p>React is a JavaScript library for building user interfaces. <br />
-                            updated 3 months ago by gaearon</p>
-                            <p><i class="ri-price-tag-3-line"></i> React, JavaScript</p>
-                            <div className="rank">
-                                93
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-md-4">
-                        <div className="card">
-                            <h4>React (4.5.6)</h4>
-                            <p>React is a JavaScript library for building user interfaces. <br />
-                            updated 3 months ago by gaearon</p>
-                            <p><i class="ri-price-tag-3-line"></i> React, JavaScript</p>
-                            <div className="rank">
-                                93
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-md-4">
-                        <div className="card">
-                            <h4>React (4.5.6)</h4>
-                            <p>React is a JavaScript library for building user interfaces. <br />
-                            updated 3 months ago by gaearon</p>
-                            <p><i class="ri-price-tag-3-line"></i> React, JavaScript</p>
-                            <div className="rank">
-                                93
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-md-4">
-                        <div className="card">
-                            <h4>React (4.5.6)</h4>
-                            <p>React is a JavaScript library for building user interfaces. <br />
-                            updated 3 months ago by gaearon</p>
-                            <p><i class="ri-price-tag-3-line"></i> React, JavaScript</p>
-                            <div className="rank">
-                                93
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-md-4">
-                        <div className="card">
-                            <h4>React (4.5.6)</h4>
-                            <p>React is a JavaScript library for building user interfaces. <br />
-                            updated 3 months ago by gaearon</p>
-                            <p><i class="ri-price-tag-3-line"></i> React, JavaScript</p>
-                            <div className="rank">
-                                93
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-md-4">
-                        <div className="card">
-                            <h4>React (4.5.6)</h4>
-                            <p>React is a JavaScript library for building user interfaces. <br />
-                            updated 3 months ago by gaearon</p>
-                            <p><i class="ri-price-tag-3-line"></i> React, JavaScript</p>
-                            <div className="rank">
-                                93
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-md-4">
-                        <div className="card">
-                            <h4>React (4.5.6)</h4>
-                            <p>React is a JavaScript library for building user interfaces. <br />
-                            updated 3 months ago by gaearon</p>
-                            <p><i class="ri-price-tag-3-line"></i> React, JavaScript</p>
-                            <div className="rank">
-                                93
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-md-4">
-                        <div className="card">
-                            <h4>React (4.5.6)</h4>
-                            <p>React is a JavaScript library for building user interfaces. <br />
-                            updated 3 months ago by gaearon</p>
-                            <p><i class="ri-price-tag-3-line"></i> React, JavaScript</p>
-                            <div className="rank">
-                                93
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-md-4">
-                        <div className="card">
-                            <h4>React (4.5.6)</h4>
-                            <p>React is a JavaScript library for building user interfaces. <br />
-                            updated 3 months ago by gaearon</p>
-                            <p><i class="ri-price-tag-3-line"></i> React, JavaScript</p>
-                            <div className="rank">
-                                93
-                            </div>
-                        </div>
-                    </div>
+                    {
+                        result.map((obj, i)=>{
+                            return (
+                                <div className="col-md-4">
+                                    <div className="card" onClick={()=>{
+                                        handleDetails(obj.package.name)
+                                    }} >
+                                        <h4>{obj.package.name}</h4>
+                                        <p>{obj.package.description}</p>
+                                        <p><i class="ri-price-tag-3-line"></i> {
+                                            obj.package.keywords?
+                                            obj.package.keywords.map((word,i)=>{
+                                                if (i < 3) {
+                                                    return word + " "
+                                                }
+                                            })
+                                            :null
+                                        }</p>
+                                        <div className="rank">
+                                            {i+1}
+                                        </div>
+                                    </div>
+                                </div>
+                            )
+                        })
+                    }
+
+
                     
                 </div>
             </div>
