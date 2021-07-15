@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './ResultSection.css'
 import axios from 'axios'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { useHistory } from 'react-router-dom'
+import { SearchReloadContext } from '../../contexts/SearchRefresh';
 
 
 function ResultSection() {
@@ -10,6 +11,10 @@ function ResultSection() {
     const [result, setresult] = useState([])
     const [searchterm, setsearchterm] = useState("")
     const [loading, setloading] = useState(false)
+    const handleDetails = (packagename) =>{
+        history.push(`/details?name=${packagename}`)
+    }
+    const [refreshsearch, ] = useContext(SearchReloadContext)
     useEffect(() => {
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
@@ -23,10 +28,7 @@ function ResultSection() {
             setloading(false)
         })
 
-    }, [])
-    const handleDetails = (packagename) =>{
-        history.push(`/details?name=${packagename}`)
-    }
+    }, [refreshsearch])
     return (
         <div className="Results">
             <div className="container">
@@ -37,7 +39,7 @@ function ResultSection() {
                         <CircularProgress />
                     </div>
                 </div>
-                :null}
+                :null} 
                 <div className="row">
                     {
                         result.map((obj, i)=>{

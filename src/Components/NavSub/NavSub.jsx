@@ -1,12 +1,15 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import logo from '../../assets/npmsicon.png'
+import { SearchReloadContext } from '../../contexts/SearchRefresh'
 import './Navsub.css'
 function NavSub() {
   const history = useHistory()
   const [searchinput, setsearchinput] = useState("")
+  const [refreshsearch,setrefreshsearch ] = useContext(SearchReloadContext)
   const handleSubmit = () => {
     history.push(`/result?term=${searchinput}`)
+    setrefreshsearch(refreshsearch + 1)
   }
   return (
     <div className="NavSub">
@@ -26,6 +29,7 @@ function NavSub() {
                     (e) => {
                       setsearchinput(e.target.value)
                     }
+
                   } />
                   <button className="searchbutton" onClick={handleSubmit}><i class="ri-search-line"></i></button>
                 </div>
