@@ -1,0 +1,36 @@
+.Details{
+    margin-top:10vh;
+    margin-bottom: 10vh;
+    font-size: 20px;
+}
+.Details .col-md-8{
+    padding: 20px 20px 20px 20px;
+}
+.Details .col-md-4{
+    padding: 20px 20px 20px 20px;
+}
+.desc{
+    text-align: justify;
+}
+.link-section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.link-section .links{
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 10px 10px 10px;
+    margin: 10px 10px 10px 10px;
+    width: 100%;
+    border: 1px solid black;
+    color: black;
+    font-size:20px;
+    transition: 0.5s;    
+}
+.link-section .links:hover{
+    transform: translateX(10px);
+}
