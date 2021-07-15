@@ -1,0 +1,27 @@
+.NavSub .navbar{
+    background-image: url('../../assets/homebg.jpg');
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+}
+.NavSub .search{
+    padding: 5px 5px 5px 5px;
+    background-color:white ;
+    border-radius: 10px;
+}
+.NavSub button{
+    background-color: black;
+    padding-left: 15px ;
+    padding-right: 15px;
+    padding-top:10px;
+    padding-bottom:10px;
+    border-radius: 10px;
+}
+.NavSub .searchfield{
+    outline: none;
+    border: none;
+    padding: 5px 5px 5px 5px;
+    color: black;
+}
